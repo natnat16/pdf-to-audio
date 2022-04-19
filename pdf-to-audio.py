@@ -6,7 +6,7 @@ Converts PDF file content to .ogg audio file
 @author: ANAT-H
 
 English text only.
-API : "http://api.voicerss.org/" (text length limited by 100KB)
+API : "http://api.voicerss.org/" (Limited to 100KB per request)
 
 All icons from https://icon-icons.com, more detail in attributions.txt
 
@@ -58,7 +58,7 @@ paused=False
 show_vol=False
 after_id=None
 s_after_id=None # slider update
-
+response=None
 
 # initialize audio player
 pyx.init()
@@ -107,19 +107,22 @@ def convert():
   Send API requeset and open dialog and save audio file (.OGG)
 
   '''
+  global response, au_length, au_file
   response = requests.get(url=END_POINT, params=PARAMS, headers=HEADERS)
-  response.raise_for_status()
+  if response.status_code != 200:
+    wav_filename.set('Failed: content too long or unsuitable')
+    style.configure("style.TEntry", foreground ='red')
+    response.raise_for_status()
   file = asksaveasfile(mode='wb', defaultextension=".ogg", title = "Save..", filetypes=[('OGG Files', '*.ogg')])
-  file.write(response.content)
-  file.close()
-  wav_filename.set(os.path.basename(file.name))
-  global au_length, au_file
-  au_file = file.name
-  # au_file = "files/poem.ogg" # debug mode
-  au_length = ceil(pyx.Sound(au_file).get_length()) # in sec
-  slider['length']=au_length
-  slider['to']=au_length
-  # wav_filename.set("poem.ogg")  # debug mode
+  if file:
+    style.configure("style.TEntry", foreground ='white')
+    file.write(response.content)
+    file.close()
+    wav_filename.set(os.path.basename(file.name))
+    au_file = file.name
+    au_length = ceil(pyx.Sound(au_file).get_length()) # in sec
+    slider['length']=au_length
+    slider['to']=au_length
 
 # player funcations
 def update_time_lbl(sec):
