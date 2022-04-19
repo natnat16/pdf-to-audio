@@ -1,0 +1,12 @@
+icons:
+
+speaker icon: 
+https://icon-icons.com/icon/speaker-sound-volume/54138
+
+player buttons:
+https://icon-icons.com/icon/player-play-arrow-jugador-jueg/9536
+https://icon-icons.com/icon/play-pause-jugado/9538
+https://icon-icons.com/icon/player-fwd-arrow/9539
+https://icon-icons.com/icon/player-rew-arrow/9535
+https://icon-icons.com/icon/player-stop/9533
+https://icon-icons.com/icon/volume-pressed/26955
