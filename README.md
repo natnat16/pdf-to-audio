@@ -1,7 +1,7 @@
 # pdf-to-audio
 #### Tkinter app for extracting text from pdf file and converting it to audio (.ogg file), includes player.  
 App works only with english text.  
-API: "http://api.voicerss.org/"  
+API: "http://api.voicerss.org/"  (site: https://www.voicerss.org/, Limited to 100KB per request)
 The app includes a player, for playing outside of this program:  
 .ogg file can be played with VLC player.  
 windows media player, needs OGG Codec Pack, can be found in
